@@ -24,31 +24,28 @@ new L.Control.Draw({
     }
 }).addTo(map);
 
-function createFormPopup() {                                                    //Creating the form popup
+function createFormPopup() {
     var popupContent = 
         '<form>' + 
-        'Starting plate pin ID:' +
-            '<input type="text" id="plateone"><br>' +
+        'Starting plate pin ID:<br><input type="text" id="pinstart"><br>' +
         'Is the first pole on the starting plate pin?<br>' +
-            '<input type="radio" id="platey" name="platestart" value="yes">' +
-                '<label for="Yes">Yes</label>' +
-            '<input type="radio" id="platen" name="platestart" value="no">' +
-                '<label for="no">No</label><br>' +
-        'Goal plate pin ID:' +
-            '<input type="text" id="goalplate"><br>' +
-        'Is the second pole on the goal plate pin?<br>' +
-            '<input type="radio" id="goaly" name="plategoal" value="yes">' +
-                '<label for="Yes">Yes</label>' +
-            '<input type="radio" id="goaln" name="plategoal" value="no">' +
-                '<label for="no">No</label><br>' +
-        'Calculation measurments:<br>' +
-            '<input type="number" id="calculationsf" name="calcone" min="1" max="1000"><br>' +
-            '<input type="number" id="calculationsf" name="calctwo" min="1" max="1000"><br>' +
-            '<input type="number" id="calculationsf" name="calcthree" min="1" max="1000"><br>' +
-            '<input type="number" id="calculationsf" name="calcfour" min="1" max="1000"><br>' +
+        '<input type="radio" id="yespin" name="startpin" value="yes">' +
+        '<label for="yespin">Yes</label>' +
+        '<input type="radio" id="nopin" name="startpin" value="no">' +
+        '<label for="nopin">No</label><br>' +
+        'Goal plate pin ID:<br><input type="text" id="pinend"><br>' +
+        '<input type="radio" id="yesgoal" name="goalpin" value="yes">' +
+        '<label for="yesgoal">Yes</label>' +
+        '<input type="radio" id="nogoal" name="goalpin" value="no">' +
+        '<label for="nogoal">No</label><br>' +
+        'Calculation measurements:<br>'+
+        '<input type="number" id="calcone" name="calcone"><br>' +
+        '<input type="number" id="calctwo" name="calctwo"><br>' +
+        '<input type="number" id="calcthree" name="calcthree"><br>' +
+        '<input type="number" id="calcfour" name="calcfour"><br>' +
         'Collection date:' +
-            '<input type="date" id="datetoday" name="date"><br>' +
-        '<input type="button" value="Submit" id="submit">' +
+        '<input type="date" id="collect" name="collect"><br>' +
+        '<input type="button" value="Submit" id="submit">' + 
         '</form>'
     drawnItems.bindPopup(popupContent).openPopup();
 }
@@ -60,22 +57,24 @@ map.addEventListener("draw:created", function(e) {                              
 
 function setData(e) {
     if(e.target && e.target.id == "submit") {
-        var startf = document.getElementById("plateone").value;      // Get user name and description
-        var starty = document.getElementById("platey").value;
-        var startn = document.getElementById("platen").value;
-        var endf = document.getElementById("goalplate").value;
-        var endy = document.getElementByID("goaly").value;
-        var endn = document.getElementByID("goaln").value;
-        var calcf = document.getElementByID("calculationsf").value;
-        var datef = document.getElementByID("datetoday").value;
-        console.log(startf);                                           // Print user name and description
-        console.log(starty);
-        console.log(startn);
-        console.log(endf);
-        console.log(endy);
-        console.log(endn);
-        console.log(calcf);
-        console.log(datef);
+        var pinstart = document.getElementById("pinstart").value;               // Get user name and description
+        var radiostart = document.getElementsByTagName("startpin").value;       // Error given if individually by tag name
+        var pingoal = document.getElementById("pinend").value;
+        var radiogoal = document.getElementsByTagName("goalpin").value;         // Error given if individually by tag name
+        var calcone = document.getElementById("calcone").value;
+        var calctwo = document.getElementById("calctwo").value;
+        var calcthree = document.getElementById("calcthree").value;
+        var calcfour = document.getElementById("calcfour").value;
+        var collectday = document.getElementById("collect").value;
+        console.log(pinstart);                                                  // Print user name and description
+        console.log(radiostart);
+        console.log(pingoal);
+        console.log(radiogoal);
+        console.log(calcone);
+        console.log(calctwo);
+        console.log(calcthree);
+        console.log(calcfour);
+        console.log(collectday);
         drawnItems.eachLayer(function(layer) {                                  // Get and print GeoJSON for each drawn layer
             var drawing = JSON.stringify(layer.toGeoJSON().geometry);
             console.log(drawing);
