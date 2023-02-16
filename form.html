@@ -1,0 +1,86 @@
+<form>
+    Starting plate pin ID:
+        <input type="text" id="start"><br>
+    Is the first pole on the starting plate pin?<br>
+        <input type="radio" id="onstart" name="yes" value="yes">
+            <label for="Yes">Yes</label>
+        <input type="radio" id="onstart" name="no" value="no">
+            <label for="no">No</label><br>
+    Goal plate pin ID:
+        <input type="text" id="end"><br>
+    Is the second pole on the goal plate pin?<br>
+        <input type="radio" id="onend" name="yes" value="yes">
+            <label for="Yes">Yes</label>
+        <input type="radio" id="onend" name="no" value="no">
+            <label for="no">No</label><br>
+    Calculation measurments:<br>
+        <input type="number" id="calculations" name="calcone" min="1" max="1000"><br>
+        <input type="number" id="calculations" name="calctwo" min="1" max="1000"><br>
+        <input type="number" id="calculations" name="calcthree" min="1" max="1000"><br>
+        <input type="number" id="calculations" name="calcfour" min="1" max="1000"><br>
+    Collection date:
+        <input type="date" id="date" name="date"><br>
+    <input type="button" value="Submit" id="submit">
+</form>
+
+
+
+function createFormPopup() {                                                    //Creating the form popup
+    var popupContent = 
+        '<form>' + 
+        'Starting plate pin ID:' +
+            '<input type="text" id="plateone"><br>' +
+        //'Is the first pole on the starting plate pin?<br>' +
+        //    '<input type="radio" id="yes" name="platestart" value="yes">' +
+        //        '<label for="yes">Yes</label>' +
+        //    '<input type="radio" id="no" name="platestart" value="no">' +
+        //        '<label for="no">No</label><br>' +
+        'Goal plate pin ID:' +
+            '<input type="text" id="goalplate"><br>' +
+        //'Is the second pole on the goal plate pin?<br>' +
+        //    '<input type="radio" id="yes" name="plategoal" value="yes">' +
+        //        '<label for="yes">Yes</label>' +
+        //    '<input type="radio" id="no" name="plategoal" value="no">' +
+        //        '<label for="no">No</label><br>' +
+        'Calculation measurments:<br>' +
+            '<input type="number" id="calculationsone" name="calcone" min="1" max="1000"><br>' +
+            '<input type="number" id="calculationstwo" name="calctwo" min="1" max="1000"><br>' +
+            '<input type="number" id="calculationsthree" name="calcthree" min="1" max="1000"><br>' +
+            '<input type="number" id="calculationsfour" name="calcfour" min="1" max="1000"><br>' +
+        'Collection date:' +
+            '<input type="date" id="datetoday" name="date"><br>' +
+        '<input type="button" value="Submit" id="submit">' +
+        '</form>'
+    drawnItems.bindPopup(popupContent).openPopup();
+}
+
+function setData(e) {
+    if(e.target && e.target.id == "submit") {
+        var startf = document.getElementById("plateone").value;      // Get user name and description
+        //var starty = document.getElementById("platestart").value;
+        var endf = document.getElementById("goalplate").value;
+        //var endy = document.getElementByID("plategoal").value;
+        var calcone = document.getElementByID("calculationsone").value;
+        var calctwo = document.getElementByID("calculationstwo").value;
+        var calcthree = document.getElementByID("calculationsthree").value;
+        var calcfour = document.getElementByID("calculationsfour").value;
+        var datef = document.getElementByID("datetoday").value;
+        console.log(startf);                                           // Print user name and description
+        //console.log(starty);
+        //console.log(startn);
+        console.log(endf);
+        //console.log(endy);
+        //console.log(endn);
+        console.log(calcone);
+        console.log(calctwo);
+        console.log(calcthree);
+        console.log(calcfour);
+        console.log(datef);
+        drawnItems.eachLayer(function(layer) {                                  // Get and print GeoJSON for each drawn layer
+            var drawing = JSON.stringify(layer.toGeoJSON().geometry);
+            console.log(drawing);
+        });
+        drawnItems.closePopup();                                                // Clear drawn items layer
+        drawnItems.clearLayers();
+    }
+}
