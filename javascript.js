@@ -36,8 +36,8 @@ function createFormPopup() {
         '<input type="radio" id="nopin" name="startpin" value="no">' +
         '<label for="nopin">No</label><br>' +
         'Goal plate pin ID:<br><input type="text" id="pinend"><br>' +
-        '<input type="radio" id="yesgoal" name="goalpin" value="yes">' +
         'Is the second pole on the goal plate pin?<br>' +
+        '<input type="radio" id="yesgoal" name="goalpin" value="yes">' +
         '<label for="yesgoal">Yes</label>' +
         '<input type="radio" id="nogoal" name="goalpin" value="no">' +
         '<label for="nogoal">No</label><br>' +
